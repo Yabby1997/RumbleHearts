@@ -1,32 +1,29 @@
 extends CharacterBody2D
 
-signal flag_move
+signal flag_move(position: Vector2)
 
 @export var speed: float = 100:
 	set(value):
 		speed = value
-		update_camera_smoothing(speed)
-		
+		#update_camera_smoothing(speed)
 		
 func _ready() -> void:
 	update_camera_smoothing(speed)
-	
 	
 func _physics_process(delta: float) -> void:
 	var horizontal := Input.get_axis("ui_left", "ui_right")
 	if horizontal:
 		velocity.x = move_toward(velocity.x, horizontal * speed, speed)
-		flag_move.emit()
+		flag_move.emit(global_position)
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		
 	var vertical := Input.get_axis("ui_up", "ui_down")
 	if vertical:
 		velocity.y = move_toward(velocity.y, vertical * speed, speed)
-		flag_move.emit()
+		flag_move.emit(global_position)
 	else:
 		velocity.y = move_toward(velocity.y, 0, speed)
-
 	move_and_slide()
 	
 	
