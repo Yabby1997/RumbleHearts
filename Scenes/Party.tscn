@@ -9,8 +9,9 @@
 size = Vector2(5, 5.5)
 
 [node name="Party" type="Node2D"]
+scale = Vector2(0.998726, 1)
 script = ExtResource("1_hyyxx")
-characters = Array[PackedScene]([ExtResource("2_ginnb")])
+characters = Array[PackedScene]([ExtResource("2_ginnb"), ExtResource("2_ginnb"), ExtResource("2_ginnb")])
 
 [node name="Flag" type="CharacterBody2D" parent="."]
 script = ExtResource("2_ddl0y")
@@ -21,10 +22,6 @@ disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="Flag"]
 zoom = Vector2(3, 3)
-limit_left = -500
-limit_top = -500
-limit_right = 500
-limit_bottom = 500
 position_smoothing_enabled = true
 position_smoothing_speed = 4.0
 rotation_smoothing_speed = 4.0
@@ -32,3 +29,5 @@ rotation_smoothing_speed = 4.0
 [node name="Sprite2D" type="Sprite2D" parent="Flag"]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_ohp7v")
+
+[connection signal="flag_move" from="Flag" to="." method="_on_flag_move"]

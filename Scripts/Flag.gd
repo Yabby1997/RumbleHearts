@@ -12,20 +12,17 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	var horizontal := Input.get_axis("ui_left", "ui_right")
-	if horizontal:
-		velocity.x = move_toward(velocity.x, horizontal * speed, speed)
-		flag_move.emit(global_position)
-	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-		
 	var vertical := Input.get_axis("ui_up", "ui_down")
-	if vertical:
-		velocity.y = move_toward(velocity.y, vertical * speed, speed)
-		flag_move.emit(global_position)
-	else:
-		velocity.y = move_toward(velocity.y, 0, speed)
-	move_and_slide()
 	
+	velocity = Vector2(horizontal, vertical) * speed
+	
+	if velocity.length() > speed:
+		velocity = velocity.normalized() * speed
+	
+	if velocity != Vector2.ZERO:
+		flag_move.emit(global_position)
+	
+	move_and_slide()
 	
 func _on_world_enter_new_world(width: Variant, height: Variant) -> void:
 	$Camera2D.limit_top = 0
