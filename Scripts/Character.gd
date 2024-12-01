@@ -33,9 +33,8 @@ func _physics_process(delta: float) -> void:
 			$NavigationAgent2D.set_velocity(direction.normalized() * flag_speed)
 		move_and_slide()
 
-func move(position: Vector2, flag_speed: float):
+func move(position: Vector2):
 	is_dragging = false
-	flag_speed = flag_speed
 	move_position = position
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:

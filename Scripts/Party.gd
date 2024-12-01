@@ -12,15 +12,18 @@ func _ready() -> void:
 	update_flag_speed()
 	
 	for character_node in character_nodes:
-		character_node.speed = randf_range(100, 150)
+		var random_speed = randf_range(100, 150)
+		character_node.speed = random_speed
+	update_flag_speed()
 	
 func update_flag_speed():
-	var min_character_speed: float = 150
+	var min_speed = 150
 	for character_node in character_nodes:
-		if character_node.speed < min_character_speed:
-			min_character_speed = character_node.speed
-	$Flag.speed = min_character_speed
-	print(min_character_speed)
+		if character_node.speed < min_speed:
+			min_speed = character_node.speed
+	for character_node in character_nodes:
+		character_node.flag_speed = min_speed
+	$Flag.speed = min_speed
 
 func _on_flag_move(position: Vector2) -> void:
 	for index in character_nodes.size():
@@ -28,7 +31,7 @@ func _on_flag_move(position: Vector2) -> void:
 		var new_position = position
 		new_position.x += 30 * index
 		if character_node.has_method("move"):
-			character_node.move(new_position, $Flag.speed)
+			character_node.move(new_position)
 			
 func _on_character_speed_change(new_speed: float):
 	update_flag_speed()
