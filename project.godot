@@ -26,6 +26,7 @@ window/handheld/orientation=1
 [layer_names]
 
 2d_physics/layer_1="Character"
+2d_physics/layer_2="GroundObject"
 
 [rendering]
 

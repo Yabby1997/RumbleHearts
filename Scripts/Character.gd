@@ -36,13 +36,16 @@ func _physics_process(delta: float) -> void:
 			return
 		var direction = global_position.direction_to(navigation_agent_2d.get_next_path_position())
 		if is_dragging:
-			velocity = direction * speed
+			navigation_agent_2d.set_velocity(direction * speed)
 		else:
-			velocity = direction * flag_speed
+			navigation_agent_2d.set_velocity(direction * flag_speed)
 		move_and_slide()
 
 ## Methods
 func move(position: Vector2):
 	is_dragging = false
-	navigation_agent_2d.path_postprocessing = 0
+	navigation_agent_2d.path_postprocessing = 1
 	move_position = position
+
+func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
+	velocity = safe_velocity
