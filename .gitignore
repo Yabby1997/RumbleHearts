@@ -1,3 +1,10 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+### SwiftPM ###
+Packages
+.build/
+xcuserdata
+DerivedData/
+*.xcodeproj
