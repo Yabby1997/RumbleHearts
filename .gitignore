@@ -4,7 +4,9 @@
 
 ### SwiftPM ###
 Packages
+Package.resolved
 .build/
+.swiftpm
 xcuserdata
 DerivedData/
 *.xcodeproj

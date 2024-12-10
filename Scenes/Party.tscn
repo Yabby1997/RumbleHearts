@@ -1,21 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://cahj8kx216dii"]
+[gd_scene load_steps=3 format=3 uid="uid://cahj8kx216dii"]
 
-[ext_resource type="Script" path="res://Scripts/Party.gd" id="1_hyyxx"]
-[ext_resource type="Script" path="res://Scripts/Flag.gd" id="2_ddl0y"]
-[ext_resource type="PackedScene" uid="uid://clifigcwwa8v0" path="res://Scenes/Character.tscn" id="2_ginnb"]
 [ext_resource type="Texture2D" uid="uid://bbp28tcsjjc53" path="res://icon.svg" id="4_ohp7v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_njfyb"]
 radius = 2.00255
 
-[node name="Party" type="Node2D"]
+[node name="Party" type="Party"]
 scale = Vector2(0.998726, 1)
-script = ExtResource("1_hyyxx")
-characters = Array[PackedScene]([ExtResource("2_ginnb"), ExtResource("2_ginnb"), ExtResource("2_ginnb")])
 
-[node name="Flag" type="CharacterBody2D" parent="."]
+[node name="Flag" type="Flag" parent="."]
 collision_mask = 2
-script = ExtResource("2_ddl0y")
 
 [node name="Camera2D" type="Camera2D" parent="Flag"]
 zoom = Vector2(5, 5)
@@ -31,5 +25,3 @@ texture = ExtResource("4_ohp7v")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flag"]
 shape = SubResource("CircleShape2D_njfyb")
 debug_color = Color(1, 0, 0, 1)
-
-[connection signal="flag_move" from="Flag" to="." method="_on_flag_move"]

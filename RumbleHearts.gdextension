@@ -1,0 +1,12 @@
+[configuration]
+entry_symbol = "swift_entry_point"
+compatibility_minimum = 4.2
+reloadable = true
+
+
+[libraries]
+macos.debug = "res://.build/arm64-apple-macosx/debug/libRumbleHearts.dylib"
+
+
+[dependencies]
+macos.debug = {"res://.build/arm64-apple-macosx/debug/libSwiftGodot.dylib" : ""}
