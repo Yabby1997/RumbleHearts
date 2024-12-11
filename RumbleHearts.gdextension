@@ -6,7 +6,9 @@ reloadable = true
 
 [libraries]
 macos.debug = "res://.build/arm64-apple-macosx/debug/libRumbleHearts.dylib"
+ios.debug = "res://.build/ios/Build/Products/Debug-iphoneos/PackageFrameworks/RumbleHearts.framework"
 
 
 [dependencies]
 macos.debug = {"res://.build/arm64-apple-macosx/debugㄴ/libSwiftGodot.dylib" : ""}
+ios.debug = {"res://.build/ios/Build/Products/Debug-iphoneos/PackageFrameworks/SwiftGodot.framework" : ""}
