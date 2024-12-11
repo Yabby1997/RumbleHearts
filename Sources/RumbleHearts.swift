@@ -6,12 +6,15 @@
 //
 
 import SwiftGodot
+import GDExtension
 
 #initSwiftExtension(
     cdecl: "swift_entry_point",
     types: [
-        Character.self,
+        World.self,
+        Ground.self,
         Party.self,
         Flag.self,
+        Character.self,
     ]
 )
