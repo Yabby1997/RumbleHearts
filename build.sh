@@ -1,5 +1,19 @@
 #!/bin/bash
 
+run_ios_build=false
+
+while getopts "r" opt; do
+  case $opt in
+    r)
+      run_ios_build=true
+      ;;
+    \?)
+      echo "Usage: $0 [-r]"
+      exit 1
+      ;;
+  esac
+done
+
 build_dylib() {
     echo "Building dylib..."
     
@@ -32,6 +46,9 @@ build_ios() {
 
 # 빌드 시작
 build_dylib
-build_ios
+
+if $run_ios_build; then
+    build_ios
+fi
 
 echo "🎉 Complete!"
