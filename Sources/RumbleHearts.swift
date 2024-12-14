@@ -16,5 +16,6 @@ import GDExtension
         Party.self,
         Flag.self,
         Character.self,
+        Joystick.self,
     ]
 )
