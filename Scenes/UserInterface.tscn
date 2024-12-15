@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://car402q3tce4c"]
+
+[ext_resource type="PackedScene" uid="uid://3ja840y3tn0o" path="res://Scenes/Joystick.tscn" id="1_qkqsu"]
+
+[node name="UserInterface" type="CanvasLayer"]
+
+[node name="Joystick" parent="." instance=ExtResource("1_qkqsu")]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 0

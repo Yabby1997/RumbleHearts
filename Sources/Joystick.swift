@@ -9,7 +9,7 @@ import Foundation
 import SwiftGodot
 
 @Godot
-final class Joystick: Area2D {
+final class Joystick: Control {
     // MARK: - Signals
     
     #signal("joystickDidStartInteracting")
@@ -23,46 +23,46 @@ final class Joystick: Area2D {
     
     // MARK: - Dependencies
     
-    @SceneTree(path: "ControllableArea") var controllableArea: CollisionShape2D?
+    @SceneTree(path: "Ring") var ring: Sprite2D?
     @SceneTree(path: "Knob") var knob: Sprite2D?
     
     // MARK: - Properties
     
     private var isInteracting = false
-    private var radius: Double? {
-        guard let controllableArea, let circle = controllableArea.shape as? CircleShape2D else { return nil }
-        return circle.radius * Double(controllableArea.globalScale.x)
+    private var radius: Float? {
+        guard let ring, let width = ring.texture?.getSize().x else { return nil }
+        return width * ring.globalScale.x / 2.0
     }
     
     // MARK: - Lifecycles
     
     override func _process(delta: Double) {
-        guard let controllableArea, let knob, let radius else { return }
-        let angle = controllableArea.globalPosition.angleToPoint(to: getGlobalMousePosition())
+        guard let ring, let knob, let radius else { return }
+        let angle = ring.globalPosition.angleToPoint(to: getGlobalMousePosition())
         
         if isInteracting {
-            if globalPosition.distanceTo(getGlobalMousePosition()) < radius {
+            if getGlobalPosition().distanceTo(getGlobalMousePosition()) < Double(radius) {
                 knob.globalPosition = getGlobalMousePosition()
             } else {
                 knob.globalPosition = .init(
-                    x: controllableArea.globalPosition.x + cos(Float(angle)) * Float(radius),
-                    y: controllableArea.globalPosition.y + sin(Float(angle)) * Float(radius)
+                    x: ring.globalPosition.x + cos(Float(angle)) * radius,
+                    y: ring.globalPosition.y + sin(Float(angle)) * radius
                 )
             }
             emit(signal: Self.joystickDidInteracted, Vector2(x: cos(Float(angle)), y: sin(Float(angle))))
         } else {
-            knob.globalPosition = knob.globalPosition.slerp(to: controllableArea.globalPosition, weight: delta * 50)
+            knob.globalPosition = knob.globalPosition.slerp(to: ring.globalPosition, weight: delta * 50)
         }
     }
     
     override func _unhandledInput(event: InputEvent?) {
-        guard let controllableArea, let knob,
+        guard let ring, let knob,
               let event, let radius, let mouseEvent = event as? InputEventMouseButton, mouseEvent.buttonIndex == MouseButton.left else {
             return
         }
     
-        if event.isPressed(), globalPosition.distanceTo(mouseEvent.globalPosition) < radius {
-            let angle = controllableArea.globalPosition.angleToPoint(to: getGlobalMousePosition())
+        if event.isPressed(), getGlobalPosition().distanceTo(mouseEvent.globalPosition) < Double(radius) {
+            let angle = ring.globalPosition.angleToPoint(to: getGlobalMousePosition())
             isInteracting = true
             knob.globalPosition = mouseEvent.globalPosition
             emit(signal: Self.joystickDidStartInteracting)

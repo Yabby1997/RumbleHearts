@@ -1,19 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://3ja840y3tn0o"]
+[gd_scene load_steps=3 format=3 uid="uid://3ja840y3tn0o"]
 
 [ext_resource type="Texture2D" uid="uid://0qeeeqmcc3eo" path="res://Assets/joystick_circle.png" id="1_vikrl"]
 [ext_resource type="Texture2D" uid="uid://blo1f74q7sjol" path="res://Assets/joystick_handle.png" id="2_l2u3q"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_otcms"]
-radius = 485.026
-
 [node name="Joystick" type="Joystick"]
-position = Vector2(380, 1045)
+offset_left = 380.0
+offset_top = 1045.0
+offset_right = 380.0
+offset_bottom = 1045.0
 scale = Vector2(0.2, 0.2)
 
-[node name="ControllableArea" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_otcms")
-
-[node name="Ring" type="Sprite2D" parent="ControllableArea"]
+[node name="Ring" type="Sprite2D" parent="."]
 texture = ExtResource("1_vikrl")
 
 [node name="Knob" type="Sprite2D" parent="."]
